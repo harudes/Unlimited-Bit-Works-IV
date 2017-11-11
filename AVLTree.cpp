@@ -2,6 +2,8 @@
 #include <vector>
 #include <queue>
 #include <stack>
+#include "string"
+#include <math.h>
 using namespace std;
 
 
@@ -75,9 +77,11 @@ public:
 			recorrido.push(p);
 			if(val!=(*p)->val)
 				p=&((*p)->hijos[val>(*p)->val]);
+			else
+				break;
 		}
 		if(*p&&(*p)->val==val)
-			return 1;
+			  return 1;
 		else
 			return 0;
 	}
@@ -86,8 +90,7 @@ public:
 		stack<Nodo**> recorrido;
 		if(!buscar(val,p,recorrido))
 			*p = new Nodo(val);
-		while(!recorrido.empty()){
-			balancear(recorrido.top());
+		while(!recorrido.empty()&&!balancear(recorrido.top())){
 			recorrido.pop();
 		}
 	}
@@ -105,8 +108,8 @@ public:
 			Nodo* temp=*p;
 			*p=(*p)->hijos[(*p)->hijos[1]!=NULL];
 			delete(temp);
-			while(!recorrido.empty()){
-				balancear(recorrido.top());
+			recorrido.pop();
+			while(!recorrido.empty()&&!balancear(recorrido.top())){
 				recorrido.pop();
 			}
 		}
@@ -136,6 +139,9 @@ public:
 	void lvlprint(){
 		queue<Nodo*> nodos;
 		Nodo* temp;
+		int gus=altura(head,0,0)+1;
+		gus=2*pow(2,gus);
+		string gus2;
 		if(head)
 			nodos.push(head);
 		while(!(nodos.empty())){
@@ -143,11 +149,13 @@ public:
 			for(; i<tam;i++){
 				temp=nodos.front();
 				nodos.pop();
+				gus2=string(" ",gus);
 				cout<<temp->val<<",";
 				if(temp->hijos[0])
 					nodos.push(temp->hijos[0]);
 				if(temp->hijos[1])
 					nodos.push(temp->hijos[1]);
+				gus /=2;
 			}
 			cout<<endl;
 		}
@@ -157,16 +165,15 @@ public:
 int main(int argc, char *argv[]) {
 	ArbolRB arbol;
 	arbol.insertar(1);
-	arbol.insertar(2);
+	arbol.insertar(8);
 	arbol.insertar(3);
+	arbol.insertar(7);
+	arbol.insertar(2);
+	arbol.insertar(9);
 	arbol.insertar(4);
 	arbol.insertar(5);
 	arbol.insertar(6);
-	arbol.insertar(7);
-	arbol.insertar(8);
-	arbol.insertar(9);
 	arbol.print();
 	arbol.lvlprint();
 	return 0;
 }
-
