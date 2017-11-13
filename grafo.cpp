@@ -154,7 +154,7 @@ public:
 		Node* A;
 		if(findNode(dato,A)){
 			int tam=A->aristas.size();
-			for(int i=tam-1;i>0;i--){
+			for(int i=tam-1;i>=0;i--){
 				removeEdge(A->aristas[i]->nodos[0]->nombre,A->aristas[i]->nodos[1]->nombre,A->aristas[i]->tam,A->aristas[i]->dir);
 			}
 			nodos.erase(nodos.begin()+nodeGraphPos(dato));
@@ -263,19 +263,22 @@ public:
 
 int main(){
 	CGraph<char,int> grafo;
-	grafo.insertNode('A');
-	grafo.insertNode('B');
-	grafo.insertNode('C');
-	grafo.insertNode('D');
-	grafo.insertNode('E');
-	grafo.insertNode('F');
-	grafo.insertEdge('A','B',10,1);
-	grafo.insertEdge('B','C',5,1);
-	grafo.insertEdge('A','D',1,1);
-	grafo.insertEdge('D','F',1,1);
-	grafo.insertEdge('F','B',2,1);
-	grafo.deleteNode('F');
+	grafo.insertNode('1');
+	grafo.insertNode('2');
+	grafo.insertNode('3');
+	grafo.insertNode('4');
+	grafo.insertNode('5');
+	grafo.insertNode('6');
+	grafo.insertEdge('1','2',7,0);
+	grafo.insertEdge('1','3',9,0);
+	grafo.insertEdge('1','6',14,0);
+	grafo.insertEdge('2','4',15,0);
+	grafo.insertEdge('2','3',10,0);
+	grafo.insertEdge('3','6',2,0);
+	grafo.insertEdge('6','5',9,0);
+	grafo.insertEdge('4','5',6,0);
+	grafo.insertEdge('3','4',11,0);
 	grafo.imprimirGrafo();
-	grafo.dijkstra('A');
+	grafo.dijkstra('1');
 	return 0;
 }
