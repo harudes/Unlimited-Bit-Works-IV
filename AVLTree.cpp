@@ -101,8 +101,10 @@ public:
 			if((*p)->hijos[0]&&(*p)->hijos[1]){
 				Nodo* aux = *p;
 				p=&((*p)->hijos[0]);
+				recorrido.push(p);
 				while((*p)->hijos[1])
 					p=&((*p)->hijos[1]);
+				recorrido.push(p);
 				aux->val=(*p)->val;
 			}
 			Nodo* temp=*p;
@@ -151,10 +153,14 @@ public:
 				nodos.pop();
 				gus2=string(" ",gus);
 				cout<<temp->val<<",";
-				if(temp->hijos[0])
+				if(temp->hijos[0]){
 					nodos.push(temp->hijos[0]);
-				if(temp->hijos[1])
+					cout<<"I: "<<temp->hijos[0]->val<<" ";
+				}
+				if(temp->hijos[1]){
 					nodos.push(temp->hijos[1]);
+					cout<<"D: "<<temp->hijos[1]->val<<" ";
+				}
 				gus /=2;
 			}
 			cout<<endl;
@@ -173,6 +179,8 @@ int main(int argc, char *argv[]) {
 	arbol.insertar(4);
 	arbol.insertar(5);
 	arbol.insertar(6);
+	arbol.eliminar(3);
+	arbol.eliminar(9);
 	arbol.print();
 	arbol.lvlprint();
 	return 0;
