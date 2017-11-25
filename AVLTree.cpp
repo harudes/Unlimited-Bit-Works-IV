@@ -81,7 +81,7 @@ public:
 				break;
 		}
 		if(*p&&(*p)->val==val)
-			  return 1;
+			return 1;
 		else
 			return 0;
 	}
@@ -102,9 +102,10 @@ public:
 				Nodo* aux = *p;
 				p=&((*p)->hijos[0]);
 				recorrido.push(p);
-				while((*p)->hijos[1])
+				while((*p)->hijos[1]){
 					p=&((*p)->hijos[1]);
-				recorrido.push(p);
+					recorrido.push(p);
+				}
 				aux->val=(*p)->val;
 			}
 			Nodo* temp=*p;
@@ -179,8 +180,7 @@ int main(int argc, char *argv[]) {
 	arbol.insertar(4);
 	arbol.insertar(5);
 	arbol.insertar(6);
-	arbol.eliminar(3);
-	arbol.eliminar(9);
+	arbol.eliminar(2);
 	arbol.print();
 	arbol.lvlprint();
 	return 0;
